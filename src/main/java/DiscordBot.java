@@ -31,26 +31,30 @@ import java.util.stream.IntStream;
  */
 
 public class DiscordBot {
-    //Default values, prefix & similarity index, values are updated on command.
+    //Default values, values are also updated on command.
     private String prefix = "~";
     private double similarity = 13;
     private int divisor = 2;
+
     private String currentAvatarType = "Undefined";
     private Double currentIndex = 0.0;
 
-    //Lists of places to notify:
+    //Notify:
     private ArrayList<Mono<Channel>> channelsToNotify;
     private ArrayList<Mono<User>> usersToNotify;
     private ArrayList<String> rolesToNotify;
+
     private ArrayList<String> ignoreList;
 
     private final ArrayList<RoleObject> roles = new ArrayList<>();
 
     /**
-     * Updates similarity index at boot up and at command similarity set.
+     * Updates properties stored in database.
      */
     private void updateProperties(){
-        MySQLAccess simDB = new MySQLAccess();
+        MySQLAccess propertiesDB = new MySQLAccess();
+
+        //Similarity, prefix, divisor
         String simQuery = "SELECT * FROM properties WHERE id = 1";
         String prefixQuery = "SELECT * FROM properties WHERE id = 2";
         String divisorQuery = "SELECT * FROM properties WHERE id = 3";
@@ -60,19 +64,20 @@ public class DiscordBot {
         ResultSet divisorResultSet = null;
 
         try{
-            Statement statement = simDB.connect().createStatement();
-            Statement statement1 = simDB.connect().createStatement();
-            Statement statement2 = simDB.connect().createStatement();
+            Statement simStatement = propertiesDB.connect().createStatement();
+            Statement prefixStatement = propertiesDB.connect().createStatement();
+            Statement divisorStatement = propertiesDB.connect().createStatement();
                     
-            simResultSet = statement.executeQuery(simQuery);
-            prefixResultSet = statement1.executeQuery(prefixQuery);
-            divisorResultSet = statement2.executeQuery(divisorQuery);
+            simResultSet = simStatement.executeQuery(simQuery);
+            prefixResultSet = prefixStatement.executeQuery(prefixQuery);
+            divisorResultSet = divisorStatement.executeQuery(divisorQuery);
 
-            //Default value if error
-            String similarityResult = "" + 13;
-            String prefixResult = "~";
-            String divisorResult = "2";
+            //Default values
+            String similarityResult = "" + similarity;
+            String prefixResult = prefix;
+            String divisorResult = "" + divisor;
 
+            //Gather and store results into temp strings.
             while(simResultSet.next()){
                 similarityResult = simResultSet.getString(2);
             }
@@ -83,6 +88,7 @@ public class DiscordBot {
                 divisorResult = divisorResultSet.getString(2);
             }
 
+            //Attempt to set default value from temp strings.
             try{
                 if (Double.parseDouble(similarityResult) != similarity){
                     similarity = Double.parseDouble(similarityResult);
@@ -110,7 +116,7 @@ public class DiscordBot {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         } finally {
-            simDB.disconnect();
+            propertiesDB.disconnect();
             try {
                 if (simResultSet != null) {
                     simResultSet.close();
@@ -128,8 +134,8 @@ public class DiscordBot {
     }
 
     /**
-     * Updates the notification list.
-     * @param client gateway client for discord bot.
+     * Updates the notification list from the database.
+     * @param client discord gateway client.
      */
     private void updateNotifyList(GatewayDiscordClient client){
         channelsToNotify = new ArrayList<>();
@@ -174,7 +180,7 @@ public class DiscordBot {
     }
 
     /**
-     * Updates local roles, at start of bot connection & at roles related commands.
+     * Updates roles from database.
      */
     private void updateAllowedRoles(){
         roles.clear();
@@ -212,6 +218,7 @@ public class DiscordBot {
         String rolesQuery = "SELECT * FROM roles";
         ResultSet rolesResultSet = null;
 
+        //Are higher roles allowed:
         boolean hAvatar = false; //ID: 1
 
         boolean hBlackListAdd = false; //ID: 2
@@ -250,6 +257,7 @@ public class DiscordBot {
                 int commandId = rolesResultSet.getInt(2);
                 int higherRoleAllowed = rolesResultSet.getInt(3);
 
+                //Iterate and update corresponding arrays.
                 switch (commandId){
                     case 1:
                         rolesAvatar.add(Snowflake.of(role));
@@ -333,6 +341,7 @@ public class DiscordBot {
             throwable.printStackTrace();
         } finally {
             rolesDBB.disconnect();
+
             try {
                 if (rolesResultSet != null) {
                     rolesResultSet.close();
@@ -340,65 +349,46 @@ public class DiscordBot {
             }catch (SQLException e){
                 e.printStackTrace();
             }
-            try{
-                if (!rolesAvatar.isEmpty()){
-                    roles.add(new RoleObject(rolesAvatar,1,hAvatar));
-                }
-                if (!rolesBlackListAdd.isEmpty()){
-                    roles.add(new RoleObject(rolesBlackListAdd,2,hBlackListAdd));
-                }
-                if (!rolesBlackListRemove.isEmpty()){
-                    roles.add(new RoleObject(rolesBlackListRemove,3,hBlackListRemove));
-                }
-                if (!rolesBlackListSearch.isEmpty()) {
-                    roles.add(new RoleObject(rolesBlackListSearch, 4, hBlackListSearch));
-                }
-                if (!rolesCommands.isEmpty()) {
-                    roles.add(new RoleObject(rolesCommands, 5, hCommands));
-                }
-                if (!rolesCommandsInfo.isEmpty()) {
-                    roles.add(new RoleObject(rolesCommandsInfo, 6, hCommandsInfo));
-                }
-                if (!rolesIgnoreAdd.isEmpty()) {
-                    roles.add(new RoleObject(rolesIgnoreAdd, 7, hIgnoreAdd));
-                }
-                if (!rolesIgnoreRemove.isEmpty()) {
-                    roles.add(new RoleObject(rolesIgnoreRemove, 8, hIgnoreRemove));
-                }
-                if (!rolesIgnoreSearch.isEmpty()) {
-                    roles.add(new RoleObject(rolesIgnoreSearch, 9, hIgnoreSearch));
-                }
-                if (!rolesNotifyAdd.isEmpty()) {
-                    roles.add(new RoleObject(rolesNotifyAdd, 10, hNotifyAdd));
-                }
-                if (!rolesNotifyRemove.isEmpty()) {
-                    roles.add(new RoleObject(rolesNotifyRemove, 11, hNotifyRemove));
-                }
-                if (!rolesNotifySearch.isEmpty()) {
-                    roles.add(new RoleObject(rolesNotifySearch, 12, hNotifySearch));
-                }
-                if (!rolesPermissionsAdd.isEmpty()) {
-                    roles.add(new RoleObject(rolesPermissionsAdd, 13, hPermissionsAdd));
-                }
-                if (!rolesPermissionsRemove.isEmpty()) {
-                    roles.add(new RoleObject(rolesPermissionsRemove, 14, hPermissionsRemove));
-                }
-                if (!rolesPermissions.isEmpty()){
-                    roles.add(new RoleObject(rolesPermissions,15,hPermissions));
-                }
-                if (!rolesPrefixSet.isEmpty()){
-                    roles.add(new RoleObject(rolesPrefixSet,16,hPrefixSet));
-                }
-                if (!rolesScan.isEmpty()) {
-                    roles.add(new RoleObject(rolesScan, 17, hScan));
-                }
-                if (!rolesSimilaritySet.isEmpty()){
-                    roles.add(new RoleObject(rolesSimilaritySet,18,hSimilaritySet));
-                }
-                if (!rolesSimilaritySearch.isEmpty()){
-                    roles.add(new RoleObject(rolesSimilaritySearch,19,hSimilaritySearch));
-                }
 
+            try{
+                if (!rolesAvatar.isEmpty())
+                    roles.add(new RoleObject(rolesAvatar,1,hAvatar));
+                if (!rolesBlackListAdd.isEmpty())
+                    roles.add(new RoleObject(rolesBlackListAdd,2,hBlackListAdd));
+                if (!rolesBlackListRemove.isEmpty())
+                    roles.add(new RoleObject(rolesBlackListRemove,3,hBlackListRemove));
+                if (!rolesBlackListSearch.isEmpty())
+                    roles.add(new RoleObject(rolesBlackListSearch, 4, hBlackListSearch));
+                if (!rolesCommands.isEmpty())
+                    roles.add(new RoleObject(rolesCommands, 5, hCommands));
+                if (!rolesCommandsInfo.isEmpty())
+                    roles.add(new RoleObject(rolesCommandsInfo, 6, hCommandsInfo));
+                if (!rolesIgnoreAdd.isEmpty())
+                    roles.add(new RoleObject(rolesIgnoreAdd, 7, hIgnoreAdd));
+                if (!rolesIgnoreRemove.isEmpty())
+                    roles.add(new RoleObject(rolesIgnoreRemove, 8, hIgnoreRemove));
+                if (!rolesIgnoreSearch.isEmpty())
+                    roles.add(new RoleObject(rolesIgnoreSearch, 9, hIgnoreSearch));
+                if (!rolesNotifyAdd.isEmpty())
+                    roles.add(new RoleObject(rolesNotifyAdd, 10, hNotifyAdd));
+                if (!rolesNotifyRemove.isEmpty())
+                    roles.add(new RoleObject(rolesNotifyRemove, 11, hNotifyRemove));
+                if (!rolesNotifySearch.isEmpty())
+                    roles.add(new RoleObject(rolesNotifySearch, 12, hNotifySearch));
+                if (!rolesPermissionsAdd.isEmpty())
+                    roles.add(new RoleObject(rolesPermissionsAdd, 13, hPermissionsAdd));
+                if (!rolesPermissionsRemove.isEmpty())
+                    roles.add(new RoleObject(rolesPermissionsRemove, 14, hPermissionsRemove));
+                if (!rolesPermissions.isEmpty())
+                    roles.add(new RoleObject(rolesPermissions,15,hPermissions));
+                if (!rolesPrefixSet.isEmpty())
+                    roles.add(new RoleObject(rolesPrefixSet,16,hPrefixSet));
+                if (!rolesScan.isEmpty())
+                    roles.add(new RoleObject(rolesScan, 17, hScan));
+                if (!rolesSimilaritySet.isEmpty())
+                    roles.add(new RoleObject(rolesSimilaritySet,18,hSimilaritySet));
+                if (!rolesSimilaritySearch.isEmpty())
+                    roles.add(new RoleObject(rolesSimilaritySearch,19,hSimilaritySearch));
             } catch (Exception e){
                 System.out.println("Error while adding roles: " + e);
             }
@@ -406,29 +396,29 @@ public class DiscordBot {
     }
 
     /**
-     * Updates ignore list, start of bot connection at related command execution.
+     * Updates ignore list.
      */
     private void updateIgnoreList(){
         ignoreList = new ArrayList<>();
 
         MySQLAccess ignoreListDB = new MySQLAccess();
-        String notifyQuery = "SELECT * FROM ignore_list";
+        String ignoreQuery = "SELECT * FROM ignore_list";
         ResultSet ignoreResultSet = null;
 
         try{
             Statement statement = ignoreListDB.connect().createStatement();
-            ignoreResultSet = statement.executeQuery(notifyQuery);
+            ignoreResultSet = statement.executeQuery(ignoreQuery);
 
             while(ignoreResultSet.next()){
                 String id = ignoreResultSet.getString(1);
                 ignoreList.add(id);
             }
-        } catch (SQLException throwable) {
+        }catch (SQLException throwable){
             throwable.printStackTrace();
-        } finally {
+        }finally{
             ignoreListDB.disconnect();
-            try {
-                if (ignoreResultSet != null) {
+            try{
+                if (ignoreResultSet != null){
                     ignoreResultSet.close();
                 }
             }catch (SQLException e){
@@ -439,9 +429,9 @@ public class DiscordBot {
     }
 
     /**
-     * A method to find a match within an AvatarDiffReceipt list.
+     * Find a similarity match within a AvatarDiffReceipt list.
      * @param  avatarDiffList list of avatar differences alongside their identifiers.
-     * @return bool if match otherwise false.
+     * @return bool returns if there is a match
      */
     private boolean findMatch(List<AvatarDiffReceipt> avatarDiffList, double similarity) {
         for (AvatarDiffReceipt aDiff : avatarDiffList) {
@@ -455,19 +445,15 @@ public class DiscordBot {
     }
 
     /**
-     * Returns List of the List argument passed to this function with size = chunkSize
+     * Returns List of sub-lists.
      *
      * @param <T> Generic type of the List
-     * @return A list of Lists which is portioned from the original list
+     * @param list List to chunk.
+     * @param chunkSize Size of each chunk.
+     * @return A list of sub-lists.
      */
-    public static <T> List<List<T>> chunkList(List<T> collection, int batchSize){
-        return IntStream.iterate(0, i -> i < collection.size(), i -> i + batchSize)
-                .mapToObj(i -> collection.subList(i, Math.min(i + batchSize, collection.size())))
-                .collect(Collectors.toList());
-    }
-
-    public static <T> List<List<T>> chunk(List<T> input, int chunkSize) {
-        int inputSize = input.size();
+    public static <T> List<List<T>> chunk(List<T> list, int chunkSize) {
+        int inputSize = list.size();
         int chunkCount = (int) Math.ceil(inputSize / (double) chunkSize);
 
         Map<Integer, List<T>> map = new HashMap<>(chunkCount);
@@ -478,17 +464,15 @@ public class DiscordBot {
                 List<T> chunk = new ArrayList<>();
                 chunks.add(chunk);
                 return chunk;
-            }).add(input.get(i));
+            }).add(list.get(i));
         }
-
         return chunks;
     }
 
-
     /**
-     * A method to find if a URL is valid or not.
+     * Determines if a URL is valid or not.
      * @param url link to be checked.
-     * @return boolean corresponding to validity of link.
+     * @return Returns validity of link.
      */
     private boolean isURLValid(String url){
         try {
@@ -500,7 +484,7 @@ public class DiscordBot {
     }
 
     /**
-     * Method to decide if string contains only digits.
+     * Checks if string contains only digits.
      * @param arg string to check.
      * @return boolean depending whether arg contains only digits.
      */
@@ -2756,7 +2740,7 @@ public class DiscordBot {
                                                 .withZone(ZoneId.systemDefault());
                                 if (success.get() & !isCustomImageSearch){
                                     if (guildMembers != null) {
-                                        memberChunks = chunkList(guildMembers,guildMembers.size()/divider);
+                                        memberChunks = chunk(guildMembers,guildMembers.size()/divider);
                                         for (List<Member> memberChunk : memberChunks) {
                                             new Thread(() -> memberChunk.forEach(guildMember -> {
                                                 String memberAvatar = guildMember.getAvatarUrl();
@@ -2815,7 +2799,7 @@ public class DiscordBot {
                                     }
                                 }else if (success.get()){
                                     if (guildMembers != null) {
-                                        memberChunks = chunkList(guildMembers,guildMembers.size()/divider);
+                                        memberChunks = chunk(guildMembers,guildMembers.size()/divider);
                                         for (List<Member> memberChunk : memberChunks) {
                                             new Thread(() -> memberChunk.forEach(guildMember -> {
                                                 String memberAvatar = guildMember.getAvatarUrl();
