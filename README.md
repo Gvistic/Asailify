@@ -27,16 +27,6 @@ Required argument = `*`
 
 ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 
-<style>
-table:nth-of-type(1) {
-    display:table;
-    width:100%;
-}
-table:nth-of-type(1) th:nth-of-type(2) {
-    width:10%;
-}
-</style>
-
 | ID | Command | Description | Usage |
 |-|-----|-----------|---------------|
 | 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
