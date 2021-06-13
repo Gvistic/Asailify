@@ -25,6 +25,8 @@ Those who have malice intentions tend to be consistent, which makes it easier fo
 Assume prefix = `~`
 Required argument = `*`
 
+ImageLink = https://cdn.discordapp.com/....
+
 | ID | Command | Description | Usage |
 |--|------|-------------|-------|
 | 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
