@@ -28,7 +28,7 @@ Required argument = `*`
 | ID | Command | Description | Usage |
 |--|------|-------------|-------|
 | 1 | `~avatar [User*]` | Returns a link of target user avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
-| 2 | `~blacklist add [URL*] [Type]` | Adds an image to the blacklist. | `~blacklist add https://cdn.discordapp.com/....png Gvistic`, `~blacklist add https://cdn.discordapp.com/....webp?size=1024` |
+| 2 | `~blacklist add [URL*] [Type]` | Adds an image to the blacklist. Type is used to give a short description of the image. Use quotes for arguments that require spaces. | `~blacklist add https://cdn.discordapp.com/....png Gvistic`, `~blacklist add https://cdn.discordapp.com/....webp?size=1024`, `~blacklist add https://cdn.discordapp.com/....png "Gvistic Gvistic"` |
 | 3 | `~blacklist remove [URL*]/[Type*]` | Removes image(s) from the blacklist. | `~blacklist remove https://cdn.discordapp.com/avatars/....png`, `~blacklist remove Gvistic` |
 | 4 | `~blacklist search [URL]/[Type]` | Returns complete list if no arguments provided, or true/false if URL is only provided, or count of tokens if type is provided. | `~blacklist search https://cdn.discordapp.com/....png`, `~blacklist search`, `~blacklist search Gvistic` |
 | 5 | `~comamnds` | Returns list of commands. | `~commands` |
