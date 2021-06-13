@@ -25,7 +25,7 @@ Those who have malice intentions tend to be consistent, which makes it easier fo
 Assume prefix = `~`
 Required argument = `*`
 
-ImageLink = https://cdn.discordapp.com/....
+ImageLink = `https://cdn.discordapp.com/....`
 
 | ID | Command | Description | Usage |
 |--|------|-------------|-------|
