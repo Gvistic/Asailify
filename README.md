@@ -27,7 +27,12 @@ Required argument = *
 
 | ID | Command | Description | Usage |
 |--|------|-------------|-------|
-| 1 | `~avatar {user*}` | Returns a link of target user avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
+| 1 | `~avatar {User*}` | Returns a link of target user avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
 | 2 | `~blacklist add {URL*} [Type]` | Adds an image to the blacklist. | `~blacklist add https://cdn.discordapp.com/....png Gvistic`, `~blacklist add https://cdn.discordapp.com/....webp?size=1024` |
 | 3 | `~blacklist remove {URL*}/[Type*]` | Removes image(s) from the blacklist. | `~blacklist remove https://cdn.discordapp.com/avatars/....png`, `~blacklist remove Gvistic` |
 | 4 | `~blacklist search {URL}/[Type]` | Returns complete list if no arguments provided. Or true/false if URL is only provided, or count of tokens if type is provided | `~blacklist search https://cdn.discordapp.com/....png`, `~blacklist search`, `~blacklist search Gvistic` |
+| 5 | `~comamnds` | Returns list of commands. | `~commands` |
+| 6 | `~command info [Command]` | Returns information about particular command. | `~command info avatar`, `~command info "blacklist search"`, `~command info 3` |
+| 7 | `~ignore add {User}` | Adds a user to the ignore list, users on the ignore list will not be notified if match is found | `~ignore add 127932752744939521`, `~ignore add @Gvistic` |
+| 8 | `~ignore remove {User*}` | Removes a user from the ignore list. | `~ignore remove 127932752744939521`, `~ignore remove @Gvistic` |
+| 9 | `~ignore search {User}` | Returns complete list if no arguments provided. Or true/false if user is only provided. | `~ignore search`, `~ignore search @Gvistic` |
