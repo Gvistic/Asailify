@@ -29,7 +29,7 @@ ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 
 | ID | Command | Description | Usage |
 |-|-----|-----------|---------------|
-| 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic                                                                               ` |
+| 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
 | 2 | `~blacklist add [URL*] [Type]` | Adds an image to the blacklist. Type is used to give a short description of the image. Use quotes for arguments that require spaces. | `~blacklist add ImageLink Gvistic`, `~blacklist add ImageLink`, `~blacklist add ImageLink "Gvistic Gvistic"` |
 | 3 | `~blacklist remove [URL*/Type*]` | Removes image(s) from the blacklist. | `~blacklist remove ImageLink`, `~blacklist remove Gvistic` |
 | 4 | `~blacklist search [URL/Type]` | Returns entire list if no arguments provided, or true/false if URL is only provided, or count of tokens if type is provided. | `~blacklist search`, `~blacklist search ImageLink`, `~blacklist search Gvistic` |
@@ -44,7 +44,7 @@ ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 | 13 | `~permissions add [CommandID*] [Snowflake*] [AllowHigherRoles]` | Adds a permission to a particular command, if allowhigher is true/1/enabled any role above the given will be permitted to execute the given command. | `~permissions add 1 12345678910`, `~permissions add 4 12345678910 true`, `~permissions add 5 @Gvistic` |
 | 14 | `~permissions remove [CommandID*] [Snowflake*]` | Removes a permissions from a particular command. | `~permissions remove 1 @Gvistic`, `~permissions remove 3 12345678910` |
 | 15 | `~perms` | Returns a embed containing all commands with corresponding permitted roles. | `~perms` |
-| 16 | `~prefix set [String*]` | Updates the bot's prefix | `~prefix set !` |
+| 16 | `~prefix set [String*]` | Updates the bot's prefix. | `~prefix set !` |
 | 17 | `~scan [All*/User*/Custom*/Legacy*]` | If all argument provided, it will scan the entire guild for any matches from the blacklist. If a user argument provided, it will only scan that user for any matches. If custom provided, you can either provide another argument of an int to set the divisor of the algorithm (higher divisor may increase scan speeds) or provide an image to scan for only that particular image. If legacy provided, a linear styled scan will start. | `~scan all`, `~scan custom ImageLink`, `~scan custom 100`, `~scan legacy` |
 | 18 | `~similarity set` | Sets the similarity index. Whenever a user's avatar is checked, pixel similarity takes place against all images in the blacklist, and stores a similarity index for each image in the blacklist. If one of those indices is lower than the set index, it notifies as a match. If there are false positives, lowering the index will help reduce that. | `~similarity set 5` |
 | 19 | `~similiarity search` | Returns the current similarity index. | `~similarity search` |
