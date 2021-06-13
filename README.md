@@ -23,7 +23,7 @@ Those who have malice intentions tend to be consistent, which makes it easier fo
 ## Commands
 
 Assume prefix = `~`
-Required argument = *
+Required argument = `*`
 
 | ID | Command | Description | Usage |
 |--|------|-------------|-------|
