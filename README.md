@@ -48,3 +48,13 @@ ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 | 17 | `~scan [All*/User*/Custom*/Legacy*]` | If all argument provided, it will scan the entire guild for any matches from the blacklist. If a user argument provided, it will only scan that user for any matches. If custom provided, you can either provide another argument of an int to set the divisor of the algorithm (higher divisor may increase scan speeds) or provide an image to scan for only that particular image. If legacy provided, a linear styled scan will start. | `~scan all`, `~scan custom ImageLink`, `~scan custom 100`, `~scan legacy` |
 | 18 | `~similarity set` | Sets the similarity index. Whenever a user's avatar is checked, pixel similarity takes place against all images in the blacklist, and stores a similarity index for each image in the blacklist. If one of those indices is lower than the set index, it notifies as a match. If there are false positives, lowering the index will help reduce that. | `~similarity set 5` |
 | 19 | `~similiarity search` | Returns the current similarity index. | `~similarity search` |
+
+<style>
+table:nth-of-type(1) {
+    display:table;
+    width:100%;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width:10%;
+}
+</style>
