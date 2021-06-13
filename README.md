@@ -29,7 +29,7 @@ ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 
 | ID | Command | Description | Usage |
 |-|-----|-----------|---------------|
-| 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic                 ` |
+| 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic                                                                               ` |
 | 2 | `~blacklist add [URL*] [Type]` | Adds an image to the blacklist. Type is used to give a short description of the image. Use quotes for arguments that require spaces. | `~blacklist add ImageLink Gvistic`, `~blacklist add ImageLink`, `~blacklist add ImageLink "Gvistic Gvistic"` |
 | 3 | `~blacklist remove [URL*/Type*]` | Removes image(s) from the blacklist. | `~blacklist remove ImageLink`, `~blacklist remove Gvistic` |
 | 4 | `~blacklist search [URL/Type]` | Returns entire list if no arguments provided, or true/false if URL is only provided, or count of tokens if type is provided. | `~blacklist search`, `~blacklist search ImageLink`, `~blacklist search Gvistic` |
