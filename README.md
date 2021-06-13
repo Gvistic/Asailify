@@ -30,4 +30,4 @@ Required argument = *
 | 1 | `~avatar {user*}` | Returns a link of target user avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
 | 2 | `~blacklist add {URL*} [Type]` | Adds an image to the blacklist. | `~blacklist add https://cdn.discordapp.com/....png Gvistic`, `~blacklist add https://cdn.discordapp.com/....webp?size=1024` |
 | 3 | `~blacklist remove {URL*}/[Type*]` | Removes image(s) from the blacklist. | `~blacklist remove https://cdn.discordapp.com/avatars/....png`, `~blacklist remove Gvistic` |
-| 4 | `~blacklist search {URL}/[Type]` | Returns complete list if no arguments provided.\nOr true/false if URL is only provided, or count of tokens if type is provided| `~blacklist search https://cdn.discordapp.com/....png`, `~blacklist search`, `~blacklist search Gvistic` |
+| 4 | `~blacklist search {URL}/[Type]` | Returns complete list if no arguments provided. Or true/false if URL is only provided, or count of tokens if type is provided | `~blacklist search https://cdn.discordapp.com/....png`, `~blacklist search`, `~blacklist search Gvistic` |
