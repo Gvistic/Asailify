@@ -40,3 +40,8 @@ Required argument = *
 | 11 | `~notify remove [Snowflake*]` | Removes a item from the notify list. | `~notify remove @Staff`, `~notify remove #mods`, `~notify remove 12345678910` |
 | 12 | `~notify search [Snowflake/Type]` | Returns complete list if no arguments provided, or true/false if snowflade is only provided, or count of tokens if type is provided. | `~notify search`, `~notify search channels`, `~notify search @Gvistic` |
 | 13 | `~permissions add [CommandID*] [Snowflake*] [AllowHigherRoles]` | Adds a permission to a particular command, if allowhigher is true/1/enabled any role above the given will be permitted to execute the given command. | `~permissions add 1 12345678910`, `~permissions add 4 12345678910 true`, `~permissions add 5 @Gvistic` |
+| 14 | `~permissions remove [CommandID*] [Snowflake*]` | Removes a permissions from a particular command. | `~permissions remove 1 @Gvistic`, `~permissions remove 3 12345678910` |
+| 15 | `~perms` | Returns a embed containing all commands with corresponding permitted roles. | `~perms` |
+| 16 | `~prefix set [String*]` | Updates the bot's prefix | `~prefix set !` |
+| 17 | `~scan [All*/User*/Custom*/Legacy*]` | If all argument provided, it will scan the entire guild for any matches from the blacklist. If a user argument provided, it will only scan that user for any matches. If custom provided, you can either provide another argument of an int to set the divisor of the algorithm (higher divisor may increase scan speeds) or provide an image to scan for only that particular image. If legacy provided, a linear styled scan will start. | `~scan all`, `~scan custom https://cdn.discordapp.com/....png`, `~scan custom 100` |
+
