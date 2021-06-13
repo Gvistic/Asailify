@@ -27,6 +27,16 @@ Required argument = `*`
 
 ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 
+<style>
+table:nth-of-type(1) {
+    display:table;
+    width:100%;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width:10%;
+}
+</style>
+
 | ID | Command | Description | Usage |
 |-|-----|-----------|---------------|
 | 1 | `~avatar [User*]` | Returns a link of the target user's avatar/profile picture. | `~avatar 127932752744939521`, `~avatar @Gvistic` |
@@ -49,12 +59,4 @@ ImageLink = `https://cdn.discordapp.com/....webp?size=1024, .png, or .jpg`
 | 18 | `~similarity set` | Sets the similarity index. Whenever a user's avatar is checked, pixel similarity takes place against all images in the blacklist, and stores a similarity index for each image in the blacklist. If one of those indices is lower than the set index, it notifies as a match. If there are false positives, lowering the index will help reduce that. | `~similarity set 5` |
 | 19 | `~similiarity search` | Returns the current similarity index. | `~similarity search` |
 
-<style>
-table:nth-of-type(1) {
-    display:table;
-    width:100%;
-}
-table:nth-of-type(1) th:nth-of-type(2) {
-    width:10%;
-}
-</style>
+
