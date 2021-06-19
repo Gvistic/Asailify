@@ -6,8 +6,8 @@ and helps divert "Attacks" or "Assaults".
 
 ## How
 
-Whenever a user joins the server (`MemberJoinEvent`), or a `MemberUpdateEvent` occurs (Ex: role change, profile change, nickname change, logging in after long period of time)
-Asailify will scan the users profile picture using pixel similiarity algorithms against a blacklist and notify staff if there is a match. 
+When a user(s) joins the server, changes avatar, role change, and or logs in after a period of inactivity asailify will scan the user(s) avatar/profile against a blacklist.
+Staff can add onto to the blacklist with commands or manually scan user(s). See full list of commands below.
 
 ## Why
 
@@ -17,8 +17,10 @@ Those who have malice intentions tend to be consistent, which makes it easier fo
 
 - The bot is written in Java, utilizing the Discord4J library. I decided to use this library/language in order to utilize Reactive Streams for asynchronous stream processing.
 - The bot is hosted on PebbleHost.
+- The bot utilizes divide and conquer algorithms in order to scan large numbers of users.
 - The bot only requires View Channel, and Send Message permission (Optional role mention permission to mention roles).
 - I plan to add machine learning/neural networks to detect NSFW PFP's in the future.
+
 
 ## Commands
 
