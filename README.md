@@ -20,6 +20,7 @@ Those who have malice intentions tend to be consistent, which makes it easier fo
 - The bot utilizes divide and conquer algorithms in order to scan large numbers of users.
 - The bot only requires View Channel, and Send Message permission (Optional role mention permission to mention roles).
 - I plan to add machine learning/neural networks to detect NSFW PFP's in the future.
+- Until there are other methods of image similarity algorithms avoid using very dark images as you will get many false positives.
 
 
 ## Commands
