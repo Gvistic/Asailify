@@ -11,7 +11,8 @@ Staff can add onto to the blacklist with commands or manually scan user(s). See 
 
 ## Why
 
-Those who have malice intentions tend to be consistent, which makes it easier for bots such as Asailify to automate and detect troublesome users thus making it easier for staff members.
+Asailify helps automate and detect troublesome users who consistently use similar profile pictures in their attacks, making it easier for staff to detect these users. 
+For instance, attackers attempting to phish posing as known verification bots who use the avatars of known verification bots, scammers who have a selection of avatars they consistenly use, or DM advertisers who commonly uses a known profile picture.
 
 ## Technical Information
 
@@ -20,8 +21,6 @@ Those who have malice intentions tend to be consistent, which makes it easier fo
 - The bot utilizes divide and conquer algorithms in order to scan large numbers of users.
 - The bot only requires View Channel, and Send Message permission (Optional role mention permission to mention roles).
 - I plan to add machine learning/neural networks to detect NSFW PFP's in the future.
-- Until there are other methods of image similarity algorithms avoid using very dark images as you will get many false positives.
-
 
 ## Commands
 
