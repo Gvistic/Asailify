@@ -1,6 +1,6 @@
 # Asailify
 
-Asailify is a discord bot, and its primary purpose is to catch potential spammers/raiders/scammers. 
+Asailify is a discord bot, and its primary purpose is to catch potential spammers/raiders/scammers and help avoid attacks. 
 The name of the bot is a word play on "Assail". To Assail means to Attack or Assault, however the bot does the opposite of this
 and helps divert "Attacks" or "Assaults".
 
