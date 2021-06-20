@@ -6,20 +6,20 @@ and helps divert "Attacks" or "Assaults".
 
 ## How
 
-When a user(s) joins the server, changes avatar, role changes, and or logs in after a period of inactivity, Asailify will scan the user(s) avatar/profile against a blacklist.
-Staff can add onto to the blacklist with commands or manually scan user(s). See full list of commands below.
+When a user(s) joins the server, changes avatar, role changes, and or logs in after a period of inactivity, Asailify will scan the user(s) avatar/profile picture against a blacklist.
+Staff can add/remove/update the blacklist with commands. Staff can also manually scan user(s). See full list of commands below.
 
 ## Why
 
-Asailify helps automate and detect troublesome users who consistently use similar profile pictures in their attacks, making it easier for staff to detect these users. 
-For instance, attackers attempting to phish posing as known verification bots who use the avatars of known verification bots, scammers who have a selection of avatars they consistently use, or DM advertisers who commonly use a known profile picture.
+Asailify helps automate and detect troublesome users who consistently use similar profile pictures in their attacks, making it easier for staff to detect these attackers. 
+For example, attackers attempting to phish posing as known verification bots who use the avatars of known verification bots, scammers who have a selection of avatars they consistently use, or DM advertisers who commonly use a known profile picture.
 
 ## Technical Information
 
 - The bot is written in Java, utilizing the Discord4J library. I decided to use this library/language to utilize Reactive Streams for asynchronous stream processing.
 - The bot is hosted on PebbleHost.
-- The bot utilizes divide and conquer algorithms in order to scan large numbers of users.
 - The bot only requires View Channel and Send Message permission (Optional role mention permission to mention roles).
+- The bot utilizes divide and conquer algorithms in order to scan large numbers of users during a manual scan.
 - I plan to add machine learning/neural networks to detect NSFW PFP's in the future.
 
 ## Commands
