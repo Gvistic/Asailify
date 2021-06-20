@@ -6,8 +6,10 @@ and helps divert "Attacks" or "Assaults".
 
 ## How
 
-When a user(s) joins the server, changes avatar, role changes, and or logs in after a period of inactivity, Asailify will scan the user(s) avatar/profile picture against a blacklist.
-Staff can add/remove/update the blacklist with commands. Staff can also manually scan user(s). See full list of commands below.
+Whenever a user(s) joins the server, changes avatar, role changes, and or logs in after a period of inactivity, 
+Asailify will scan the user(s) avatar/profile picture against a blacklist.
+Staff can add/remove/update this blacklist using commands. 
+Staff can also manually scan user(s). (See full list of [commands](https://github.com/Gvistic/Asailify/blob/master/README.md#commands) below).
 
 ## Why
 
